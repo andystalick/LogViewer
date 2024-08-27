@@ -1,13 +1,13 @@
 const LogListItem = (props) => {
-  const { item } = props;
+  const { itemData } = props;
 
-  const formatttedTime = new Date(item._time).toISOString();
+  const formatttedTime = new Date(itemData.time).toISOString();
 
   return (
     <details>
       <summary>
-        <span>{formatttedTime}</span>
-        <span>raw text</span>
+        <span>{itemData.time}</span>
+        <span>{itemData.rawRow}</span>
       </summary>
       <div>item details</div>
     </details>

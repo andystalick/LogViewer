@@ -1,19 +1,22 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { URL } from '../utils/constants';
 
 export const parseRow = (rawRow) => {
   const parsedRow = JSON.parse(rawRow);
   const time = parsedRow._time;
-  return { [time]: { parsedRow, rawRow } };
+  return { time, parsedRow, rawRow };
 };
 
 const useLogData = () => {
-  const [logItems, setLogItems] = useState({});
+  const [logItems, setLogItems] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
+  const effectHasRun = useRef(false);
+
   useEffect(() => {
+    if (effectHasRun.current) return; // this helps us avoid running the effect twice, as would normally happen in React's Strict mode
     const streamNDJSONFile = async () => {
       try {
         const response = await fetch(URL);
@@ -33,10 +36,7 @@ const useLogData = () => {
           for (const line of lines) {
             if (line.trim()) {
               try {
-                setLogItems((prevItems) => {
-                  return Object.assign({}, prevItems, parseRow(line));
-                  //   return { ...prevItems, ...parseRow(line) };
-                });
+                setLogItems((prevItems) => prevItems.concat([parseRow(line)]));
               } catch (e) {
                 console.error('Failed to parse JSON line:', line, e);
               }
@@ -47,10 +47,7 @@ const useLogData = () => {
         // Parse the last incomplete line if it exists
         if (buffer.trim().length > 0) {
           try {
-            setLogItems((prevItems) => {
-              //   return { ...prevItems, ...parseRow(buffer) };
-              return Object.assign({}, prevItems, parseRow(buffer));
-            });
+            setLogItems((prevItems) => prevItems.concat([parseRow(buffer)]));
           } catch (e) {
             console.error('Failed to parse JSON line:', buffer, e);
           }
@@ -64,6 +61,7 @@ const useLogData = () => {
     };
 
     streamNDJSONFile(); // often you see an IIFE here, this seems a little nicer
+    effectHasRun.current = true;
   }, []);
 
   return { logItems, error, loading: isLoading };
