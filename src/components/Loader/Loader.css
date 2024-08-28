@@ -1,0 +1,8 @@
+.loader {
+  padding: 0.25rem 0.25rem;
+  font-size: 0.9rem;
+  background-color: #fff;
+  progress {
+    width: 100%;
+  }
+}

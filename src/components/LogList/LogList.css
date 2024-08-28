@@ -1,11 +1,23 @@
 .log-list {
   position: absolute;
   bottom: 0;
-  width: calc(100% - 4px);
-  border: 2px solid var(--neutral50);
-}
+  width: 100%;
 
-.scroller {
-  overflow-y: scroll;
-  height: 50vh;
+  .list-header {
+    padding: 0.25rem 0.25rem;
+    font-size: 0.9rem;
+    background-color: var(--neutral40);
+    color: var(--background);
+    display: flex;
+  }
+
+  .list-header-time {
+    margin-left: 2rem; /* there is probably a way to rely on the widths used by flexbox in the scrollable area, but this works for now */
+    width: 12rem; /* there is probably a way to rely on the widths used by flexbox in the scrollable area, but this works for now */
+  }
+
+  .list-body {
+    overflow-y: scroll;
+    height: 50vh;
+  }
 }

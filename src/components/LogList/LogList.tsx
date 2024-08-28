@@ -1,22 +1,27 @@
 import './LogList.css';
 
+import Loader from '../Loader';
 import { LogDataContext } from '../../utils/Contexts';
 import LogListItem from '../LogListItem';
+import { TOTALROWS } from '../../utils/constants';
 import { useContext } from 'react';
 
-const LogList = () => {
+const LogList: React.FC = () => {
   const logData = useContext(LogDataContext);
 
   return (
     <div className="log-list">
-      <div>
-        <span>Time</span>
-        <span>Event</span>
+      <div className="list-header">
+        <div className="list-header list-header-time">Time</div>
+        <div className="list-header list-header-event">Event</div>
       </div>
-      {logData.loading == true && (
-        <div>{`Loaded ${Object.keys(logData?.logItems || []).length} rows`}</div>
+      {logData.loading && (
+        <Loader
+          loaded={Object.keys(logData?.logItems || []).length}
+          total={TOTALROWS}
+        />
       )}
-      <div className="scroller">
+      <div className="list-body">
         {Object.keys(logData.logItems).map((key, index) => (
           <LogListItem
             key={`${index}-${key}`}

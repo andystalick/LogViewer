@@ -1,7 +1,7 @@
 /* We don't have a complete Design System or anything, but CSS vars let us set up a bit of a theme and manage it centrally */
 :root {
   --black: #333333;
-  --white: #eeeeee;
+  --white: hsl(0, 0%, 100%);
   --maroon: #800000;
 
   --blue-hue: 211;

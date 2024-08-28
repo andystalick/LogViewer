@@ -54,9 +54,10 @@ const useLogData = (): LogData => {
             const lines = buffer.split('\n'); // one chunk might contain multiple lines, so split on newlines - this is NDJSON
             buffer = lines.pop() || ''; // Keep the last incomplete line in the buffer for later or reset to empty string
 
-            //   let counter = 0;
+            // let counter = 0; // TODO - DEBUG CODE set a counter so we can render with a smaller number of rows
             for (const line of lines) {
               // if (counter < 100) {
+              // TODO - DEBUG CODE set a counter so we can render with a smaller number of rows
               // loop through the lines we parsed from the chunk
               if (line.trim().length > 0) {
                 // as long as the line isn't empty after removing trailing blankspace
@@ -65,12 +66,12 @@ const useLogData = (): LogData => {
                     // update our hook's state to add the new line as K:V in the state object
                     return { ...prevItems, ...parseRow(line) };
                   });
-                } catch (e) {
-                  console.error('Failed to parse JSON line:', line, e);
+                } catch (err) {
+                  throw new Error(`Failed to parse JSON line: ${line} ${err}`);
                 }
-                //   }
-                //   counter++;
               }
+              // counter++; // TODO - DEBUG CODE set a counter so we can render with a smaller number of rows
+              // }
             }
           }
 
@@ -82,8 +83,8 @@ const useLogData = (): LogData => {
                 // update our hook's state to add the new line as K:V in the state object
                 return { ...prevItems, ...parseRow(buffer) };
               });
-            } catch (e) {
-              console.error('Failed to parse JSON line:', buffer, e);
+            } catch (err) {
+              throw new Error(`Failed to parse JSON line: ${buffer} ${err}`);
             }
           }
           setIsLoading(false); // once we're done with fetch data, set a flag to tell consumers

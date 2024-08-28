@@ -1,10 +1,7 @@
 .json-display {
   white-space: pre-wrap;
-  margin: 0;
+  margin: 0 0.1875rem 0.1875rem 0.1875rem;
   padding: 0.5rem 1rem 0.5rem 1rem;
   background-color: var(--background);
-  border-right: 2px solid var(--selected);
-  border-bottom: 2px solid var(--selected);
-  border-left: 2px solid var(--selected);
   color: var(--code);
 }

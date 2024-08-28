@@ -1,12 +1,17 @@
 .log-list-item {
   font-size: 0.8125rem;
-  font-family: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono',
-    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  font-family: var(--fontFamilyCode);
   display: flex;
   flex-direction: column;
   white-space: nowrap;
+  overflow-y: auto;
+
   &:nth-of-type(2n) {
     background: var(--list-zebra);
+  }
+
+  &[open] {
+    background-color: var(--selected);
   }
 
   summary {
@@ -26,7 +31,6 @@
     }
   }
   &[open] summary {
-    background-color: var(--selected);
     &::before {
       content: '▾';
     }
