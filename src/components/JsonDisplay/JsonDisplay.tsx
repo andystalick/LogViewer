@@ -1,9 +1,9 @@
 import './JsonDisplay.css';
 
-const JsonDisplay = ({ obj }) => {
+const JsonDisplay = (props: { obj: object }) => {
   return (
     <pre className="json-display">
-      <code>{JSON.stringify(obj, null, 2)}</code>
+      <code>{JSON.stringify(props.obj, null, 2)}</code>
     </pre>
   );
 };

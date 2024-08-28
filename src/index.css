@@ -4,45 +4,39 @@
   --white: #eeeeee;
   --maroon: #800000;
 
-  --blue-h: 211;
-  --blue-s: 100%;
-  --blue-l: 50%;
-  --blue-hsl: var(--blue-h), var(--blue-s), var(--blue-l);
+  --blue-hue: 211;
+  --blue-saturation: 80%;
+  --blue10: hsl(var(--blue-hue), var(--blue-saturation), 10%);
+  --blue20: hsl(var(--blue-hue), var(--blue-saturation), 20%);
+  --blue30: hsl(var(--blue-hue), var(--blue-saturation), 30%);
+  --blue40: hsl(var(--blue-hue), var(--blue-saturation), 40%);
+  --blue50: hsl(var(--blue-hue), var(--blue-saturation), 50%);
+  --blue60: hsl(var(--blue-hue), var(--blue-saturation), 60%);
+  --blue70: hsl(var(--blue-hue), var(--blue-saturation), 70%);
+  --blue80: hsl(var(--blue-hue), var(--blue-saturation), 80%);
+  --blue90: hsl(var(--blue-hue), var(--blue-saturation), 90%);
 
-  --blue10: hsla(var(--blue-hsl), 0.1);
-  --blue20: hsla(var(--blue-hsl), 0.2);
-  --blue30: hsla(var(--blue-hsl), 0.3);
-  --blue40: hsla(var(--blue-hsl), 0.4);
-  --blue50: hsla(var(--blue-hsl), 0.5);
-  --blue60: hsla(var(--blue-hsl), 0.6);
-  --blue70: hsla(var(--blue-hsl), 0.7);
-  --blue80: hsla(var(--blue-hsl), 0.8);
-  --blue90: hsla(var(--blue-hsl), 0.9);
-
-  --neutral-h: 211;
-  --neutral-s: 0%;
-  --neutral-l: 50%;
-  --neutral-hsl: var(--neutral-h), var(--neutral-s), var(--neutral-l);
-
-  --neutral10: hsla(var(--neutral-hsl), 0.1);
-  --neutral20: hsla(var(--neutral-hsl), 0.2);
-  --neutral30: hsla(var(--neutral-hsl), 0.3);
-  --neutral40: hsla(var(--neutral-hsl), 0.4);
-  --neutral50: hsla(var(--neutral-hsl), 0.5);
-  --neutral60: hsla(var(--neutral-hsl), 0.6);
-  --neutral70: hsla(var(--neutral-hsl), 0.7);
-  --neutral80: hsla(var(--neutral-hsl), 0.8);
-  --neutral90: hsla(var(--neutral-hsl), 0.9);
+  --neutral-hue: 211;
+  --neutral-saturation: 20%;
+  --neutral10: hsl(var(--neutral-hue), var(--neutral-saturation), 10%);
+  --neutral20: hsl(var(--neutral-hue), var(--neutral-saturation), 20%);
+  --neutral30: hsl(var(--neutral-hue), var(--neutral-saturation), 30%);
+  --neutral40: hsl(var(--neutral-hue), var(--neutral-saturation), 40%);
+  --neutral50: hsl(var(--neutral-hue), var(--neutral-saturation), 50%);
+  --neutral60: hsl(var(--neutral-hue), var(--neutral-saturation), 60%);
+  --neutral70: hsl(var(--neutral-hue), var(--neutral-saturation), 70%);
+  --neutral80: hsl(var(--neutral-hue), var(--neutral-saturation), 80%);
+  --neutral90: hsl(var(--neutral-hue), var(--neutral-saturation), 90%);
 
   --background: var(--white);
   --text: var(--black);
-  --selected: var(--blue30);
+  --selected: var(--blue80);
   font-size: 16px; /* set up our 1rem unit */
   --fontFamily: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --fontFamilyCode: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono',
     'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
   --code: var(--maroon);
-  --list-zebra: var(--neutral20);
+  --list-zebra: var(--neutral80);
 }
 
 body {

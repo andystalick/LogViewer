@@ -13,20 +13,16 @@ const LogList = () => {
         <span>Time</span>
         <span>Event</span>
       </div>
-      <div>
-        {logData.loading == true &&
-          `Loaded ${Object.keys(logData?.logItems || []).length} rows`}
-      </div>
+      {logData.loading == true && (
+        <div>{`Loaded ${Object.keys(logData?.logItems || []).length} rows`}</div>
+      )}
       <div className="scroller">
-        <div>
-          {Object.keys(logData.logItems).map((key, index) => (
-            <LogListItem
-              key={`${index}-${key}`}
-              itemData={logData.logItems[key]}
-            />
-          ))}
-        </div>
-        {logData.loading == true && <div>{`...`}</div>}
+        {Object.keys(logData.logItems).map((key, index) => (
+          <LogListItem
+            key={`${index}-${key}`}
+            logItem={logData.logItems[key]}
+          />
+        ))}
       </div>
     </div>
   );

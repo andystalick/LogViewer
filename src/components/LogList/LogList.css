@@ -1,10 +1,11 @@
 .log-list {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: calc(100% - 4px);
+  border: 2px solid var(--neutral50);
 }
 
 .scroller {
   overflow-y: scroll;
-  height: 30vh;
+  height: 50vh;
 }
