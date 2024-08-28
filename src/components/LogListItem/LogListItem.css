@@ -1,0 +1,32 @@
+.log-list-item {
+  font-size: 0.8125rem;
+  font-family: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono',
+    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+  &:nth-of-type(2n) {
+    background: var(--list-zebra);
+  }
+
+  summary {
+    padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+    cursor: pointer;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    &::before {
+      content: '▸';
+    }
+    .item-raw {
+      overflow-x: hidden;
+    }
+  }
+  &[open] summary {
+    background-color: var(--selected);
+    &::before {
+      content: '▾';
+    }
+  }
+}

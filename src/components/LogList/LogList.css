@@ -1,5 +1,10 @@
+.log-list {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
 .scroller {
   overflow-y: scroll;
-  height: 200px;
-  border: 2px solid #ccc;
+  height: 30vh;
 }

@@ -1,0 +1,54 @@
+/* We don't have a complete Design System or anything, but CSS vars let us set up a bit of a theme and manage it centrally */
+:root {
+  --black: #333333;
+  --white: #eeeeee;
+  --maroon: #800000;
+
+  --blue-h: 211;
+  --blue-s: 100%;
+  --blue-l: 50%;
+  --blue-hsl: var(--blue-h), var(--blue-s), var(--blue-l);
+
+  --blue10: hsla(var(--blue-hsl), 0.1);
+  --blue20: hsla(var(--blue-hsl), 0.2);
+  --blue30: hsla(var(--blue-hsl), 0.3);
+  --blue40: hsla(var(--blue-hsl), 0.4);
+  --blue50: hsla(var(--blue-hsl), 0.5);
+  --blue60: hsla(var(--blue-hsl), 0.6);
+  --blue70: hsla(var(--blue-hsl), 0.7);
+  --blue80: hsla(var(--blue-hsl), 0.8);
+  --blue90: hsla(var(--blue-hsl), 0.9);
+
+  --neutral-h: 211;
+  --neutral-s: 0%;
+  --neutral-l: 50%;
+  --neutral-hsl: var(--neutral-h), var(--neutral-s), var(--neutral-l);
+
+  --neutral10: hsla(var(--neutral-hsl), 0.1);
+  --neutral20: hsla(var(--neutral-hsl), 0.2);
+  --neutral30: hsla(var(--neutral-hsl), 0.3);
+  --neutral40: hsla(var(--neutral-hsl), 0.4);
+  --neutral50: hsla(var(--neutral-hsl), 0.5);
+  --neutral60: hsla(var(--neutral-hsl), 0.6);
+  --neutral70: hsla(var(--neutral-hsl), 0.7);
+  --neutral80: hsla(var(--neutral-hsl), 0.8);
+  --neutral90: hsla(var(--neutral-hsl), 0.9);
+
+  --background: var(--white);
+  --text: var(--black);
+  --selected: var(--blue30);
+  font-size: 16px; /* set up our 1rem unit */
+  --fontFamily: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --fontFamilyCode: 'Menlo', 'Monaco', 'Lucida Console', 'Liberation Mono',
+    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Courier New', monospace;
+  --code: var(--maroon);
+  --list-zebra: var(--neutral20);
+}
+
+body {
+  color: var(--text);
+  background-color: var(--background);
+  font-family: var(--fontFamily);
+  padding: 0;
+  margin: 0;
+}

@@ -6,16 +6,28 @@ import { useContext } from 'react';
 
 const LogList = () => {
   const logData = useContext(LogDataContext);
-  console.log(
-    'rerendering LogList',
-    Object.keys(logData?.logItems || []).length
-  );
 
   return (
-    <div className="scroller">
-      {logData.logItems.map((logItem, index) => (
-        <LogListItem key={index} itemData={logItem} />
-      ))}
+    <div className="log-list">
+      <div>
+        <span>Time</span>
+        <span>Event</span>
+      </div>
+      <div>
+        {logData.loading == true &&
+          `Loaded ${Object.keys(logData?.logItems || []).length} rows`}
+      </div>
+      <div className="scroller">
+        <div>
+          {Object.keys(logData.logItems).map((key, index) => (
+            <LogListItem
+              key={`${index}-${key}`}
+              itemData={logData.logItems[key]}
+            />
+          ))}
+        </div>
+        {logData.loading == true && <div>{`...`}</div>}
+      </div>
     </div>
   );
 };

@@ -1,15 +1,24 @@
-const LogListItem = (props) => {
-  const { itemData } = props;
+import './LogListItem.css';
 
-  const formatttedTime = new Date(itemData.time).toISOString();
+import JsonDisplay from '../JsonDisplay/JsonDisplay';
+import { useState } from 'react';
+
+const LogListItem = ({ itemData }) => {
+  const formatttedTime = new Date(itemData.parsedRow._time).toISOString();
+
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <details>
+    <details
+      className="log-list-item"
+      open={isOpen}
+      onToggle={() => setIsOpen(!isOpen)}
+    >
       <summary>
-        <span>{itemData.time}</span>
-        <span>{itemData.rawRow}</span>
+        <div className="item-time">{formatttedTime}</div>
+        <div className="item-raw">{`"${itemData.rawRow}"`}</div>
       </summary>
-      <div>item details</div>
+      {isOpen && <JsonDisplay obj={itemData.parsedRow} />}
     </details>
   );
 };
