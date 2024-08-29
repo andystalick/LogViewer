@@ -1,9 +1,10 @@
 import './JsonDisplay.css';
 
-const JsonDisplay = (props: { obj: object }) => {
+const JsonDisplay = (props: { str: string }) => {
+  const obj = JSON.parse(props.str);
   return (
     <pre className="json-display">
-      <code>{JSON.stringify(props.obj, null, 2)}</code>
+      <code>{JSON.stringify(obj, null, 2)}</code>
     </pre>
   );
 };

@@ -8,6 +8,7 @@ import { useContext } from 'react';
 
 const LogList: React.FC = () => {
   const logData = useContext(LogDataContext);
+  console.log('rerendering LogList', Date.now());
 
   return (
     <div className="log-list">
@@ -16,17 +17,11 @@ const LogList: React.FC = () => {
         <div className="list-header list-header-event">Event</div>
       </div>
       {logData.loading && (
-        <Loader
-          loaded={Object.keys(logData?.logItems || []).length}
-          total={TOTALROWS}
-        />
+        <Loader loaded={logData.logItems.length} total={TOTALROWS} />
       )}
       <div className="list-body">
-        {Object.keys(logData.logItems).map((key, index) => (
-          <LogListItem
-            key={`${index}-${key}`}
-            logItem={logData.logItems[key]}
-          />
+        {logData.logItems.map((value, index) => (
+          <LogListItem key={`${index}`} logItem={value} />
         ))}
       </div>
     </div>

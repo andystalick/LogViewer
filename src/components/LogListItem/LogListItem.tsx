@@ -1,15 +1,16 @@
 import './LogListItem.css';
 
 import JsonDisplay from '../JsonDisplay/JsonDisplay';
-import { LogItem } from '../../hooks/useLogData';
 import { useState } from 'react';
 
 interface LogListItemProps {
-  logItem: LogItem;
+  logItem: string;
 }
 
 const LogListItem: React.FC<LogListItemProps> = ({ logItem }) => {
-  const formatttedTime = new Date(logItem.parsedRow._time).toISOString();
+  const regex = /"_time":(\d+)/;
+  const time = logItem.match(regex) || '';
+  const formattedTime = new Date(Number(time[1])).toISOString();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,10 +21,10 @@ const LogListItem: React.FC<LogListItemProps> = ({ logItem }) => {
       onToggle={() => setIsOpen(!isOpen)}
     >
       <summary>
-        <time className="item-time">{formatttedTime}</time>
-        <div className="item-raw">{`"${logItem.rawRow}"`}</div>
+        <time className="item-time">{formattedTime}</time>
+        <div className="item-raw">{`"${logItem}"`}</div>
       </summary>
-      {isOpen && <JsonDisplay obj={logItem.parsedRow} />}
+      {isOpen && <JsonDisplay str={logItem} />}
     </details>
   );
 };
