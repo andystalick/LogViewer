@@ -1,13 +1,11 @@
 import './LogListItem.css';
 
+import { memo, useState } from 'react';
+
 import JsonDisplay from '../JsonDisplay/JsonDisplay';
-import { useState } from 'react';
 
-interface LogListItemProps {
-  logItem: string;
-}
-
-const LogListItem: React.FC<LogListItemProps> = ({ logItem }) => {
+const LogListItem = memo((props: { logItem: string }) => {
+  const { logItem } = props;
   const regex = /"_time":(\d+)/;
   const time = logItem.match(regex) || '';
   const formattedTime = new Date(Number(time[1])).toISOString();
@@ -27,6 +25,6 @@ const LogListItem: React.FC<LogListItemProps> = ({ logItem }) => {
       {isOpen && <JsonDisplay str={logItem} />}
     </details>
   );
-};
+});
 
 export default LogListItem;

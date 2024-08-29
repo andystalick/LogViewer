@@ -8,7 +8,6 @@ import { useContext } from 'react';
 
 const LogList: React.FC = () => {
   const logData = useContext(LogDataContext);
-  console.log('rerendering LogList', Date.now());
 
   return (
     <div className="log-list">

@@ -27,7 +27,6 @@ const useLogData = (): LogData => {
           let buffer = '';
           let bin: Array<string> = [];
 
-          let binSize = 500;
           while (true) {
             const { done, value } = await reader.read(); // async ask the Reader to parse some chunks in this loop
             if (done) break; // stop looping if the Reader is finished
@@ -37,15 +36,15 @@ const useLogData = (): LogData => {
             buffer += chunk; // append the chunk to the buffer
             const lines = buffer.split('\n'); // split the buffer into lines
             buffer = lines.pop() || ''; // keep just last line in the buffer for the next chunk
-            bin = [...bin, ...lines]; // add the parsed lines from this iteration into our bin
-            if (bin.length >= binSize) {
+            bin = bin.concat(lines); // add the parsed lines from this iteration into our bin
+            if (bin.length >= 5000) {
               // if we have enough lines, perform the expensive operation of dumping into state
               setLogItems((prevLogItems) => [...prevLogItems, ...bin]);
               bin = [];
-              binSize = 10000; //increase the bin size to reduce the number of state updates after the first one
             }
           }
           if (bin.length > 0) {
+            // just in case we still have some items in the bin after we're done, get them into state
             setLogItems((prevLogItems) => [...prevLogItems, ...bin]);
           }
         }
