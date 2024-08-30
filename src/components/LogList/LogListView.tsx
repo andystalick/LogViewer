@@ -3,6 +3,7 @@ import './LogList.css';
 import Loader from '../Loader';
 import type { LogItem } from '../../hooks/useLogData';
 import LogListItem from '../LogListItem';
+import { useMemo } from 'react';
 
 interface LogListViewProps {
   loading: boolean;
@@ -12,6 +13,9 @@ interface LogListViewProps {
 
 const LogListView: React.FC<LogListViewProps> = (props) => {
   const { loading, logItems, totalRows } = props;
+
+  const memoizedLogItems = useMemo(() => logItems, [logItems]);
+
   return (
     <div className="log-list">
       <div className="list-header">
@@ -22,7 +26,7 @@ const LogListView: React.FC<LogListViewProps> = (props) => {
         <Loader loaded={Object.keys(logItems).length} total={totalRows} />
       )}
       <div className="list-body">
-        {Object.keys(logItems).map((key, index) => (
+        {Object.keys(memoizedLogItems).map((key, index) => (
           <LogListItem
             key={`${index}-${key}`}
             rawRow={logItems[key]?.rawRow}
