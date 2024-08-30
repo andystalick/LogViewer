@@ -1,9 +1,10 @@
+import { BINSIZE, URL } from '../utils/constants';
 import { useEffect, useState } from 'react';
 
-import { URL } from '../utils/constants';
-
 export interface LogData {
-  logItems: Array<string>;
+  logItems: {
+    [key: string]: LogItem;
+  };
   error: Error | null;
   loading: boolean;
 }
@@ -13,7 +14,7 @@ export interface LogItem {
 }
 
 const useLogData = (): LogData => {
-  const [logItems, setLogItems] = useState<Array<string>>([]);
+  const [logItems, setLogItems] = useState({});
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -25,7 +26,7 @@ const useLogData = (): LogData => {
         if (reader !== undefined) {
           const decoder = new TextDecoder('utf-8'); // get a TextDecoder so we know how to decode the bytes in the chunks
           let buffer = '';
-          let bin: Array<string> = [];
+          let bin: { [key: string]: LogItem } = {};
 
           while (true) {
             const { done, value } = await reader.read(); // async ask the Reader to parse some chunks in this loop
@@ -36,16 +37,25 @@ const useLogData = (): LogData => {
             buffer += chunk; // append the chunk to the buffer
             const lines = buffer.split('\n'); // split the buffer into lines
             buffer = lines.pop() || ''; // keep just last line in the buffer for the next chunk
-            bin = bin.concat(lines); // add the parsed lines from this iteration into our bin
-            if (bin.length >= 5000) {
+            // add the parsed lines from this iteration into our bin
+            lines.forEach((line) => {
+              const regex = /"_time":(\d+)/;
+              const time = line.match(regex)?.[1] || '';
+              bin[time] = { rawRow: line };
+            });
+            if (Object.keys(bin).length >= BINSIZE) {
               // if we have enough lines, perform the expensive operation of dumping into state
-              setLogItems((prevLogItems) => [...prevLogItems, ...bin]);
-              bin = [];
+              setLogItems((prevLogItems) => {
+                return { ...prevLogItems, ...bin };
+              });
+              bin = {};
             }
           }
-          if (bin.length > 0) {
+          if (Object.keys(bin).length > 0) {
             // just in case we still have some items in the bin after we're done, get them into state
-            setLogItems((prevLogItems) => [...prevLogItems, ...bin]);
+            setLogItems((prevLogItems) => {
+              return { ...prevLogItems, ...bin };
+            });
           }
         }
       } catch (err) {

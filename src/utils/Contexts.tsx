@@ -5,7 +5,7 @@ import useLogData from '../hooks/useLogData';
 
 // Create a context
 export const LogDataContext = createContext({
-  logItems: [],
+  logItems: {},
   loading: false,
   error: null,
 } as LogData);

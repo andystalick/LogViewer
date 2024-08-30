@@ -16,11 +16,18 @@ const LogList: React.FC = () => {
         <div className="list-header list-header-event">Event</div>
       </div>
       {logData.loading && (
-        <Loader loaded={logData.logItems.length} total={TOTALROWS} />
+        <Loader
+          loaded={Object.keys(logData.logItems).length}
+          total={TOTALROWS}
+        />
       )}
       <div className="list-body">
-        {logData.logItems.map((value, index) => (
-          <LogListItem key={`${index}`} logItem={value} />
+        {Object.keys(logData.logItems).map((key, index) => (
+          <LogListItem
+            key={`${index}-${key}`}
+            logItem={logData.logItems[key]}
+            rawTime={key}
+          />
         ))}
       </div>
     </div>
