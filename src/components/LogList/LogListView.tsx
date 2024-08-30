@@ -25,7 +25,7 @@ const LogListView: React.FC<LogListViewProps> = (props) => {
         {Object.keys(logItems).map((key, index) => (
           <LogListItem
             key={`${index}-${key}`}
-            logItem={logItems[key]}
+            rawRow={logItems[key]?.rawRow}
             rawTime={key}
           />
         ))}

@@ -1,0 +1,14 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshot test 1`] = `
+<div
+  class="loader"
+  data-testid="loader"
+>
+  Loaded 50 of 100 items
+  <progress
+    max="100"
+    value="50"
+  />
+</div>
+`;

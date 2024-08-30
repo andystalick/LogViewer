@@ -1,0 +1,31 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshot test 1`] = `
+<pre
+  class="json-display"
+  data-testid="json-display"
+>
+  <code>
+    {
+  "_time": 1722523685074,
+  "cid": "api",
+  "channel": "conf:policies",
+  "level": "info",
+  "message": "loading policy",
+  "context": "cribl",
+  "policy": {
+    "args": [
+      "groupName",
+      "dashboardId"
+    ],
+    "template": [
+      "GET /m/\${groupName}/search/dashboards/\${dashboardId}",
+      "GET /m/\${groupName}/search/dashboards/\${dashboardId}/*"
+    ],
+    "description": "Can view and use the dashboard",
+    "title": "Read Only"
+  }
+}
+  </code>
+</pre>
+`;

@@ -22,10 +22,11 @@ const useLogData = (): LogData => {
     const streamNDJSONFile = async () => {
       try {
         const response = await fetch(URL); // use the browser's async XHR API
-        const reader = response.body?.getReader(); // get a ReadableStream API "reader" to parse the chunks as they come in
+        const reader = response.body?.getReader(); // get a browser ReadableStream API Reader to parse the chunks as they come in
         if (reader !== undefined) {
-          const decoder = new TextDecoder('utf-8'); // get a TextDecoder so we know how to decode the bytes in the chunks
-          let buffer = '';
+          const decoder = new TextDecoder('utf-8'); // get a browser TextDecoder so we know how to decode the bytes in the chunks
+
+          let buffer = ''; // this is where we store the string decoded data c
           let bin: { [key: string]: LogItem } = {};
 
           while (true) {
@@ -35,24 +36,26 @@ const useLogData = (): LogData => {
             // do something with the Value chunk we got from the Reader
             const chunk = decoder.decode(value); // decode the bytes into a string
             buffer += chunk; // append the chunk to the buffer
-            const lines = buffer.split('\n'); // split the buffer into lines
+            const lines = buffer.split('\n'); // split the buffer into an array oflines
             buffer = lines.pop() || ''; // keep just last line in the buffer for the next chunk
+
             // add the parsed lines from this iteration into our bin
             lines.forEach((line) => {
-              const regex = /"_time":(\d+)/;
-              const time = line.match(regex)?.[1] || '';
+              const regex = /"_time":(\d+)/; // we delay the expensive full JSON parsing of the raw line until we do a detail render of the row
+              const time = line.match(regex)?.[1] || ''; // we only need _time for our rendering so we use a cheaper regex
               bin[time] = { rawRow: line };
             });
+
+            // if we have enough lines, perform the expensive operation of dumping into state, which causes React to render
             if (Object.keys(bin).length >= BINSIZE) {
-              // if we have enough lines, perform the expensive operation of dumping into state
               setLogItems((prevLogItems) => {
                 return { ...prevLogItems, ...bin };
               });
-              bin = {};
+              bin = {}; // empty the bin
             }
           }
+          // just in case we still have some items in the bin after we're done reading chunks from the reader, get them into state
           if (Object.keys(bin).length > 0) {
-            // just in case we still have some items in the bin after we're done, get them into state
             setLogItems((prevLogItems) => {
               return { ...prevLogItems, ...bin };
             });

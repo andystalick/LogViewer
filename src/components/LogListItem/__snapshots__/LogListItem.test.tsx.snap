@@ -1,0 +1,23 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`snapshot test closed 1`] = `
+<details
+  class="log-list-item"
+  data-testid="log-list-item"
+>
+  <summary
+    role="button"
+  >
+    <time
+      class="item-time"
+    >
+      2024-08-30T17:15:30.163Z
+    </time>
+    <div
+      class="item-raw"
+    >
+      "{"_time":1722523685074,"cid":"api","channel":"conf:policies","level":"info","message":"loading policy","context":"cribl","policy":{"args":["groupName","dashboardId"],"template":["GET /m/\${groupName}/search/dashboards/\${dashboardId}","GET /m/\${groupName}/search/dashboards/\${dashboardId}/*"],"description":"Can view and use the dashboard","title":"Read Only"}}"
+    </div>
+  </summary>
+</details>
+`;
