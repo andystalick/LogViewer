@@ -1,20 +1,37 @@
 import './LogList.css';
 
-import { LogDataContext } from '../../utils/Contexts';
-import LogListView from './LogListView';
-import { TOTALROWS } from '../../utils/constants';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
-const LogList: React.FC = () => {
-  const logData = useContext(LogDataContext);
+import Loader from '../Loader';
+import { LogDataContext } from '../../utils/Contexts';
+import LogListItem from '../LogListItem';
+import { TOTALROWS } from '../../utils/constants';
+
+const LogListView: React.FC = () => {
+  const { logItems, loading } = useContext(LogDataContext);
+
+  const memoizedLogItems = useMemo(() => logItems, [logItems]);
 
   return (
-    <LogListView
-      loading={logData.loading}
-      logItems={logData.logItems}
-      totalRows={TOTALROWS}
-    ></LogListView>
+    <div className="log-list">
+      <div className="list-header">
+        <div className="list-header list-header-time">Time</div>
+        <div className="list-header list-header-event">Event</div>
+      </div>
+      {loading && (
+        <Loader loaded={Object.keys(logItems).length} total={TOTALROWS} />
+      )}
+      <div className="list-body">
+        {Object.keys(memoizedLogItems).map((key, index) => (
+          <LogListItem
+            key={`${index}-${key}`}
+            rawRow={logItems[key]?.rawRow}
+            rawTime={key}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
 
-export default LogList;
+export default LogListView;

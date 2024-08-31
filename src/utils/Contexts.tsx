@@ -7,7 +7,6 @@ import useLogData from '../hooks/useLogData';
 export const LogDataContext = createContext({
   logItems: {},
   loading: false,
-  error: null,
 } as LogData);
 
 // Create a provider component

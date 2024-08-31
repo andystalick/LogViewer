@@ -1,11 +1,11 @@
-import { BINSIZE, URL } from '../utils/constants';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import { URL } from '../utils/constants';
 
 export interface LogData {
   logItems: {
     [key: string]: LogItem;
   };
-  error: Error | null;
   loading: boolean;
 }
 
@@ -15,7 +15,6 @@ export interface LogItem {
 
 const useLogData = (): LogData => {
   const [logItems, setLogItems] = useState({});
-  const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(true);
 
   const streamNDJSONFile = async () => {
@@ -50,7 +49,7 @@ const useLogData = (): LogData => {
     streamNDJSONFile();
   }, []);
 
-  return { logItems, error, loading };
+  return { logItems, loading };
 };
 
 export default useLogData;

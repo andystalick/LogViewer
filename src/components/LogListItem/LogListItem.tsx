@@ -21,7 +21,10 @@ const LogListItem = memo<LogListItemProps>((props) => {
   };
 
   return (
-    <div className={`log-list-item ${isOpen && 'open'}`}>
+    <div
+      className={`log-list-item ${isOpen && 'open'}`}
+      data-testid="log-list-item"
+    >
       <div className="item-summary" onClick={handleClick} role="button">
         <span>{formattedTime}</span>
         <span className="item-raw">{rawRow}</span>
