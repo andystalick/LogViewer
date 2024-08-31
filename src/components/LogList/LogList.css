@@ -4,7 +4,7 @@
   width: 100%;
 
   .list-header {
-    padding: 0.25rem 0.25rem;
+    line-height: 2;
     font-size: 0.9rem;
     background-color: var(--neutral40);
     color: var(--background);
@@ -18,7 +18,7 @@
 
   .list-body {
     overflow-y: scroll;
-    height: 50vh;
+    height: calc(80vh - 1.35rem);
   }
 
   .log-list-item {

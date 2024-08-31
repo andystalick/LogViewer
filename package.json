@@ -12,12 +12,17 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@nivo/bar": "^0.87.0",
+    "@nivo/core": "^0.87.0",
+    "d3-array": "^3.2.4",
+    "d3-time": "^3.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@testing-library/react": "^16.0.1",
+    "@types/d3-array": "^3.2.1",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
