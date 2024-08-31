@@ -1,4 +1,4 @@
-import './LogListItem.css';
+// import './LogListItem.css';
 
 import { memo, useState } from 'react';
 
@@ -16,19 +16,18 @@ const LogListItem = memo<LogListItemProps>((props) => {
 
   const [isOpen, setIsOpen] = useState(open == undefined ? false : open);
 
+  const handleClick = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <details
-      className="log-list-item"
-      open={isOpen}
-      onToggle={() => setIsOpen(!isOpen)}
-      data-testid="log-list-item"
-    >
-      <summary role="button">
-        <time className="item-time">{formattedTime}</time>
-        <div className="item-raw">{`"${rawRow}"`}</div>
-      </summary>
+    <div className={`log-list-item ${isOpen && 'open'}`}>
+      <div className="item-summary" onClick={handleClick} role="button">
+        <span>{formattedTime}</span>
+        <span className="item-raw">{rawRow}</span>
+      </div>
       {isOpen && <JsonDisplay str={rawRow} />}
-    </details>
+    </div>
   );
 });
 

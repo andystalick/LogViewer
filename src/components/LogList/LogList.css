@@ -20,4 +20,43 @@
     overflow-y: scroll;
     height: 50vh;
   }
+
+  .log-list-item {
+    font-size: 0.8125rem;
+    font-family: var(--fontFamilyCode);
+    display: flex;
+    flex-direction: column;
+    white-space: nowrap;
+    overflow-y: auto;
+
+    &:nth-of-type(2n) {
+      background: var(--list-zebra);
+    }
+
+    &.open {
+      background-color: var(--selected);
+    }
+
+    .item-summary {
+      padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      &::before {
+        content: '▸';
+        font-size: 1.2rem;
+        line-height: 0.6;
+        color: var(--neutral50);
+      }
+      .open & {
+        &::before {
+          content: '▾';
+        }
+      }
+      .item-raw {
+        overflow-x: hidden;
+      }
+    }
+  }
 }
