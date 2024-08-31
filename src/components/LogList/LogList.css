@@ -35,6 +35,11 @@
 
     &.open {
       background-color: var(--selected);
+      .item-summary {
+        &::before {
+          content: '▾';
+        }
+      }
     }
 
     .item-summary {
@@ -48,11 +53,6 @@
         font-size: 1.2rem;
         line-height: 0.6;
         color: var(--neutral50);
-      }
-      .open & {
-        &::before {
-          content: '▾';
-        }
       }
       .item-raw {
         overflow-x: hidden;
