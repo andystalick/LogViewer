@@ -33,6 +33,7 @@ const TimeLine = () => {
             legend: 'Event Count',
             legendPosition: 'middle',
             legendOffset: -50,
+            tickSize: 500,
           }}
           labelSkipWidth={12}
           labelSkipHeight={12}
