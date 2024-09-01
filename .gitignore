@@ -47,5 +47,7 @@ dist/
 
 coverage/
 
+.codesandbox/
+
 # MacOS
 .DS_Store
